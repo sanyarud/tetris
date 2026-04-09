@@ -1,9 +1,9 @@
 # 🎮 Тетріс
 
-Класична гра Тетріс написана на Python з використанням Pygame.
+Класична гра Тетріс написана на C++ з використанням SDL2.
 
-![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
-![Pygame](https://img.shields.io/badge/Pygame-2.6+-green.svg)
+![C++](https://img.shields.io/badge/C++-17-blue.svg)
+![SDL2](https://img.shields.io/badge/SDL2-2.0+-green.svg)
 ![Platform](https://img.shields.io/badge/Platform-macOS-lightgrey.svg)
 
 ## Скріншот
@@ -13,7 +13,7 @@
 ## Можливості
 
 - 7 кольорових фігур з обертанням та wall kick
-- Тінь падіння (привид) — бачити куди впаде фігура
+- Тінь падіння (привід) — бачити куди впаде фігура
 - Попередній перегляд наступної фігури
 - Зростаюча складність — швидкість збільшується з рівнем
 - Підрахунок очок: 100/300/500/800 за 1/2/3/4 лінії
@@ -32,16 +32,12 @@
 | R           | Рестарт          |
 | ESC         | Вихід            |
 
-## Встановлення
+## Збірка
 
 ```bash
-pip3 install pygame
-```
-
-## Запуск
-
-```bash
-python3 tetris.py
+brew install sdl2 sdl2_ttf
+cd tetris_cpp
+make
 ```
 
 ## macOS Додаток
@@ -53,6 +49,10 @@ python3 tetris.py
 ```bash
 xattr -cr /Applications/Тетріс.app
 ```
+
+## Автор
+
+© sanyarud
 
 ## Ліцензія
 
