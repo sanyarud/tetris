@@ -254,7 +254,7 @@ public:
         }
 
         // Керування
-        yoff = H - 140;
+        yoff = H - 160;
         const char* controls[] = {
             "\xE2\x86\x90 \xE2\x86\x92  \xD1\x80\xD1\x83\xD1\x85",
             "\xE2\x86\x91     \xD0\xBE\xD0\xB1\xD0\xB5\xD1\x80\xD1\x82\xD0\xB0\xD0\xBD\xD0\xBD\xD1\x8F",
@@ -266,6 +266,9 @@ public:
             drawText(ren, small_font, line, sx, yoff, {120,120,140});
             yoff += 24;
         }
+
+        // Автор
+        drawText(ren, small_font, "\xC2\xA9 sanyarud", sx, H - 28, {80,80,100});
 
         // Game Over
         if (over) {
