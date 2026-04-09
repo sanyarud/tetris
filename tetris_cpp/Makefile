@@ -1,6 +1,6 @@
 CXX = clang++
 CXXFLAGS = -std=c++17 -O2 -Wall -I/opt/homebrew/include/SDL2 -F/opt/homebrew/Frameworks
-LDFLAGS = -L/opt/homebrew/lib -lSDL2 -lSDL2_ttf
+LDFLAGS = -L/opt/homebrew/lib -lSDL2 -lSDL2_ttf -lSDL2_mixer
 
 TARGET = tetris
 SRC = main.cpp
