@@ -20,17 +20,22 @@ jobs:
         run: |
           vcpkg install sdl2 sdl2-ttf sdl2-mixer --triplet x86-windows
 
+      - name: List available libs
+        shell: pwsh
+        run: |
+          Get-ChildItem C:\vcpkg\installed\x86-windows\lib\*.lib | Select-Object Name
+
       - name: Build with MSVC
         shell: cmd
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
-          cl.exe /std:c++17 /O2 /EHsc /D_USE_MATH_DEFINES ^
+          cl.exe /std:c++17 /O2 /EHsc /D_USE_MATH_DEFINES /DSDL_MAIN_HANDLED ^
             /I "C:\vcpkg\installed\x86-windows\include" ^
             /I "C:\vcpkg\installed\x86-windows\include\SDL2" ^
             main.cpp ^
             /Fe:tetris.exe ^
             /link /LIBPATH:"C:\vcpkg\installed\x86-windows\lib" ^
-            SDL2main.lib SDL2.lib SDL2_ttf.lib SDL2_mixer.lib shell32.lib ^
+            SDL2.lib SDL2_ttf.lib SDL2_mixer.lib shell32.lib ^
             /SUBSYSTEM:WINDOWS
 
       - name: Collect DLLs and create ZIP
