@@ -925,6 +925,9 @@ static const char* findFont() {
 
 // ── Main ─────────────────────────────────────────────────
 int main(int argc, char* argv[]) {
+#ifdef SDL_MAIN_HANDLED
+    SDL_SetMainReady();
+#endif
     srand(time(nullptr));
 
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {

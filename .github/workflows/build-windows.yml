@@ -36,7 +36,7 @@ jobs:
             /Fe:tetris.exe ^
             /link /LIBPATH:"C:\vcpkg\installed\x86-windows\lib" ^
             SDL2.lib SDL2_ttf.lib SDL2_mixer.lib shell32.lib ^
-            /SUBSYSTEM:WINDOWS
+            /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup
 
       - name: Collect DLLs and create ZIP
         shell: pwsh
