@@ -1,0 +1,8 @@
+tetris
+build_win/
+win_deps/
+*.zip
+*.pem
+*.o
+*.obj
+.DS_Store

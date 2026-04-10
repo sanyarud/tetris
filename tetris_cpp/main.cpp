@@ -5,6 +5,14 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
+
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -888,6 +896,32 @@ private:
     }
 };
 
+// ── Кросплатформний пошук шрифту ─────────────────────────
+static const char* findFont() {
+#ifdef _WIN32
+    static char path[MAX_PATH];
+    const char* windir = getenv("WINDIR");
+    if (!windir) windir = "C:\\Windows";
+    snprintf(path, sizeof(path), "%s\\Fonts\\arial.ttf", windir);
+    return path;
+#elif defined(__APPLE__)
+    return "/System/Library/Fonts/Helvetica.ttc";
+#else
+    // Linux fallback
+    const char* paths[] = {
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/usr/share/fonts/TTF/DejaVuSans.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
+        nullptr
+    };
+    for (int i = 0; paths[i]; i++) {
+        FILE* f = fopen(paths[i], "r");
+        if (f) { fclose(f); return paths[i]; }
+    }
+    return "DejaVuSans.ttf";
+#endif
+}
+
 // ── Main ─────────────────────────────────────────────────
 int main(int argc, char* argv[]) {
     srand(time(nullptr));
@@ -912,9 +946,10 @@ int main(int argc, char* argv[]) {
     if (!win) { fprintf(stderr, "Window: %s\n", SDL_GetError()); return 1; }
 
     SDL_Renderer* ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);
-    TTF_Font* font      = TTF_OpenFont("/System/Library/Fonts/Helvetica.ttc", 22);
-    TTF_Font* big_font  = TTF_OpenFont("/System/Library/Fonts/Helvetica.ttc", 36);
-    TTF_Font* small_font= TTF_OpenFont("/System/Library/Fonts/Helvetica.ttc", 16);
+    const char* fontPath = findFont();
+    TTF_Font* font      = TTF_OpenFont(fontPath, 22);
+    TTF_Font* big_font  = TTF_OpenFont(fontPath, 36);
+    TTF_Font* small_font= TTF_OpenFont(fontPath, 16);
 
     Tetris game;
     Uint32 last = SDL_GetTicks();
