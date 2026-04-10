@@ -10,6 +10,9 @@ defaults:
   run:
     working-directory: tetris_cpp
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-latest
