@@ -50,7 +50,7 @@ jobs:
           Copy-Item C:\vcpkg\installed\x86-windows\bin\SDL2_ttf.dll release/
           Copy-Item C:\vcpkg\installed\x86-windows\bin\SDL2_mixer.dll release/
           Get-ChildItem C:\vcpkg\installed\x86-windows\bin\*.dll | Where-Object {
-            $_.Name -match 'freetype|zlib|harfbuzz|bz2|brotli|png|ogg|vorbis|mpg|flac'
+            $_.Name -match 'freetype|zlib|harfbuzz|bz2|brotli|png|ogg|vorbis|mpg|flac|wavpack'
           } | Copy-Item -Destination release/
           Compress-Archive -Path release/* -DestinationPath Tetris-Windows.zip
 
